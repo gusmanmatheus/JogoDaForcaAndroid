@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/forcaaa"
+    android:orientation="vertical"
+    tools:context=".MainActivity">
+
+    <ImageView
+        android:id="@+id/enforcado_Id"
+        android:layout_width="match_parent"
+        android:layout_height="264dp"
+        android:layout_marginBottom="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginTop="8dp"
+        android:adjustViewBounds="false"
+        android:background="@drawable/forca0erro"
+        android:cropToPadding="false" />
+
+    <TextView
+        android:id="@+id/palavr_Traco_Id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textColorLink="@android:color/holo_orange_light"
+        android:textSize="36sp" />
+
+    <ListView
+        android:id="@+id/lista_Botao_Id"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#ed43392c" />
+
+</LinearLayout>
