@@ -52,7 +52,7 @@ public class MainActivity extends AppCompatActivity {
         palavras.add("lampada");
 
         //pegando palavra aleatoria
-            aux = palavras.get(1);
+            aux = palavras.get((int) (Math.random()*palavras.size()));
         quantos_tracos = aux.length();
         final String[] palavra_aleatoria = new String[quantos_tracos];
 
@@ -89,34 +89,32 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
                 boolean ck = false;
+                int controle =0;
+
                 for (int u = 0; letrasErradas.size() > u; u++) {
-                    if (letrasErradas.get(u).equals(letras[posicao])) {
-                        ck = true;
-
-                    }
+                    if (letrasErradas.get(u)!=letras[posicao]) {
 
 
-
-
-                }
+                    }else{ck = true;}
+            }
                 if (ck == true) {
 
-                } else { letrasErradas.add(tentativa);
+                }
+                else {letrasErradas.add(letras[posicao]) ;
 
                     if (tentativa != null && tentativa != "") {
-                    } else {
+                    } else {tentativa = letras[posicao];
                         Toast.makeText(getApplicationContext(), letras[posicao], Toast.LENGTH_SHORT).show();
-                        tentativa = letras[posicao];
-                        int controle =0;
+
                         for (int i = 0; i < quantos_tracos; i++) {
-     if(traco_controler==null){
+                           if(traco_controler==null||traco_controler.equals("")){
                                   traco_controler[i] = " - ";
      }
                         }
 
                         for (int j = 0; j < quantos_tracos; j++) {
            if (palavra_aleatoria[j].toLowerCase().equals(tentativa.toLowerCase())) {
-                                traco_controler[j] = palavra_aleatoria[j];
+                                traco_controler[j] = tentativa;
                                 controle++;
                             }
                         else{
@@ -126,23 +124,26 @@ public class MainActivity extends AppCompatActivity {
 
                         String teste="";
                             for (int j = 0; j < quantos_tracos; j++) {
-                                if(traco_controler==null){
-                                    teste+=" - ";
-                                }
-                                else{
-                                teste +=traco_controler[j];
-                            }}
+                                     if(traco_controler[j]!=null&&!traco_controler[j].equals("")){
+                                         teste += traco_controler[j];
+                                      }
+                                else {
+                                          teste+=" - ";
+                                     }
+                    }
+
+
                             tracos.setText(teste);
 
-                        if (controle <= 0) {
+                        if (controle == 0) {
 
                             erro++;
                         }
+
                         imagemForca();
 
-
                         tentativa = "";
-                        if (erro >= 6) {
+                        if (erro >= 5) {
                             acabou = true;
                         }
 
