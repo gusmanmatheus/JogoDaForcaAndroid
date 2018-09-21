@@ -13,23 +13,23 @@ import android.widget.Toast;
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private int quantosTracos;
-    private static int pontos = 0;
+    private  int pontos = 0;
 
     private String tentativa;
-    private  String[] tracoControler;
-    private  ArrayList<String> palavraAleatoria;
-    private static ImageView fotoForca;
+    private String[] tracoControler;
+    private ArrayList<String> palavraAleatoria;
+    private ImageView fotoForca;
     private TextView letrasUsadas;
-    private static TextView tracos;
+    private TextView tracos;
     private TextView score;
     private ListView listaLetras;
-    private static int erro ;
+    private int erro ;
     private ArrayList<String> letrasErradas = new ArrayList<String>();
     private boolean acabou=false;
     private String[] letras ={"A","B","C","Ç","D","E","F","G","H","I","J","K","L",
             "M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
     String  aux  ;
-    private static  ArrayList<String> palavras = new ArrayList<String>();
+    private static ArrayList<String> palavras = new ArrayList<String>();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -198,21 +198,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-    private static void ScoreForca(TextView score){
+    private  void ScoreForca(TextView score){
         pontos =pontos+10;
         Integer.toString(pontos);
         score.setText("Score:");
         score.setText(score.getText()+" "+pontos);
 
     }
-    private static void ScoreForcareset(TextView score){
+    private  void ScoreForcareset(TextView score){
         pontos =0;
         Integer.toString(pontos);
         score.setText("Score:");
         score.setText(score.getText()+" "+pontos);
 
     }
-    private static void restForca(ArrayList<String> palavras ){
+    private  void restForca(ArrayList<String> palavras ){
         int pol = palavras.size();
         palavras.get((int) (Math.random()*pol+1));
 
@@ -220,30 +220,29 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private static void imagemForca(){
-        if(erro==0){
-            fotoForca.setImageResource(R.drawable.forca0erro);
-        }
-        if (erro==1){
-            fotoForca.setImageResource(R.drawable.forca1erro);
-        }
-        if (erro==2){
-            fotoForca.setImageResource(R.drawable.forca2erros);
+    private  void imagemForca(){
+        switch (erro){
+           case 0:
+               fotoForca.setImageResource(R.drawable.forca0erro);
+                  break;
+           case 1:
+               fotoForca.setImageResource(R.drawable.forca1erro);
+                  break;
+            case 2:
+                fotoForca.setImageResource(R.drawable.forca2erros);
+                break;
+            case 3:
+                fotoForca.setImageResource(R.drawable.forca3erros);
+                break;
+            case 4:
+                fotoForca.setImageResource(R.drawable.forca4erro);
+                break;
+            case 5:
+                fotoForca.setImageResource(R.drawable.forca5erros);
+                break;
 
         }
-        if (erro==3){
-            fotoForca.setImageResource(R.drawable.forca3erros);
 
-        }
-        if (erro==4){
-            fotoForca.setImageResource(R.drawable.forca4erro);
-        }
-        if (erro==5){
-            fotoForca.setImageResource(R.drawable.forca5erros);
-
-
-
-        }
 
     }
 }
