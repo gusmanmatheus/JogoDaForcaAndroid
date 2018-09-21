@@ -25,7 +25,7 @@ public class MainActivity extends AppCompatActivity {
     private ListView listaLetras;
     private int erro ;
     private ArrayList<String> letrasErradas = new ArrayList<String>();
-    private boolean acabou=false;
+    private boolean acabou = false;
     private String[] letras ={"A","B","C","Ç","D","E","F","G","H","I","J","K","L",
             "M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
     String  aux  ;
@@ -58,9 +58,8 @@ public class MainActivity extends AppCompatActivity {
         quantosTracos = aux.length();
         palavraAleatoria = new ArrayList<String>();
 
-        // palavra_aleatoria=palavras.get((int) (Math.random()*palavras.size()));
 
-        ;
+
         tracoControler = new String[quantosTracos];
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -83,7 +82,7 @@ public class MainActivity extends AppCompatActivity {
         }
         tracos.setText(testee);
 //pegando qual letra clickada e passando pra uma variavel ,e criando uma vez so , pra nao
-        //ficar cicando varias vezes
+//ficar cicando varias vezes
 
         for (int l = 0; aux.length() > l; l++) {
             palavraAleatoria.add(String.valueOf((aux.charAt(l))));
@@ -93,27 +92,22 @@ public class MainActivity extends AppCompatActivity {
         listaLetras.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
-                boolean ck = false;
+ //se a letra inserida for igual as outras ja inserida, o return impede que entre
+                for (String tro: letrasErradas) {
 
+                    if (tro.equals(letras[posicao])) {
+                       return;
 
-                for (int u = 0; letrasErradas.size() > u; u++) {
-//                    letrasUsadas.setText(letrasusadas.getText()+" "+letrasErradas.get(u));
-
-                    if (letrasErradas.get(u) != letras[posicao]) {
-
-
-                    } else {
-                        ck = true;
                     }
                 }
-                if (ck == true) {
 
-                } else {
-
+ //se nao tiver repetidas segue o fluxo nomalmente
                     letrasErradas.add(letras[posicao]);
 
                     if (tentativa != null && tentativa != "") {
-                    } else {
+
+                    }
+                    else {
                         tentativa = letras[posicao];
                         Toast.makeText(getApplicationContext(), letras[posicao], Toast.LENGTH_SHORT).show();
 
@@ -127,8 +121,6 @@ public class MainActivity extends AppCompatActivity {
                             if (palavraAleatoria.get(j).toLowerCase().equals(tentativa.toLowerCase())) {
                                 tracoControler[j] = tentativa;
                                 controle++;
-                            } else {
-
                             }
                         }
                         int a = 0;
@@ -143,22 +135,16 @@ public class MainActivity extends AppCompatActivity {
                             }
                         }
 
-
                         tracos.setText(teste);
 
-
                         if (controle == 0) {
-
                             erro++;
                         }
 
                         imagemForca();
-
                         tentativa = "";
 
                         if (erro >= 5 || a == 0) {
-
-
                             erro = 0;
                             aux = palavras.get((int) (Math.random() * palavras.size()));
                             quantosTracos = aux.length();
@@ -189,14 +175,12 @@ public class MainActivity extends AppCompatActivity {
 
                         for (int u = 0; letrasErradas.size() > u; u++) {
                             letrasUsadas.setText(letrasUsadas.getText()+" "+letrasErradas.get(u));
-                        }
-                    }
+                     }
                 }
             }
         });
 
-    }
-
+}
 
     private  void ScoreForca(TextView score){
         pontos =pontos+10;
@@ -210,13 +194,6 @@ public class MainActivity extends AppCompatActivity {
         Integer.toString(pontos);
         score.setText("Score:");
         score.setText(score.getText()+" "+pontos);
-
-    }
-    private  void restForca(ArrayList<String> palavras ){
-        int pol = palavras.size();
-        palavras.get((int) (Math.random()*pol+1));
-
-
 
     }
 
@@ -243,6 +220,6 @@ public class MainActivity extends AppCompatActivity {
 
         }
 
-
     }
+
 }
