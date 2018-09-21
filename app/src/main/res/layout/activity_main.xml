@@ -9,6 +9,14 @@
     tools:context=".MainActivity">
 
     <TextView
+        android:id="@+id/scoreMax_Id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="MaxScore:"
+        android:textColor="@android:color/black"
+        android:textSize="20sp" />
+
+    <TextView
         android:id="@+id/score_Id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

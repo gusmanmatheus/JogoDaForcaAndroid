@@ -1,5 +1,6 @@
 package atmconsutoria.mathe.jogodaforca;
 
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -12,16 +13,19 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
+    private String scoreMaxx;
     private int quantosTracos;
     private  int pontos = 0;
-
+    private int pontosMaxAux;
     private String tentativa;
+    private static  final String scoreMaximo= "0";
     private String[] tracoControler;
     private ArrayList<String> palavraAleatoria;
     private ImageView fotoForca;
     private TextView letrasUsadas;
     private TextView tracos;
     private TextView score;
+    private TextView scoreMax;
     private ListView listaLetras;
     private int erro ;
     private ArrayList<String> letrasErradas = new ArrayList<String>();
@@ -59,13 +63,13 @@ public class MainActivity extends AppCompatActivity {
         palavraAleatoria = new ArrayList<String>();
 
 
-
         tracoControler = new String[quantosTracos];
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         fotoForca = findViewById(R.id.enforcado_Id);
         tracos = findViewById(R.id.palavr_Traco_Id);
         score = findViewById(R.id.score_Id);
+        scoreMax=findViewById(R.id.scoreMax_Id);
         letrasUsadas=findViewById(R.id.letras_Usadas_Id);
         listaLetras = findViewById(R.id.lista_Botao_Id);
         ArrayAdapter<String> adaptador = new ArrayAdapter<String>(
@@ -164,9 +168,11 @@ public class MainActivity extends AppCompatActivity {
                             tentativa = "";
                             imagemForca();
                             if (a > 0) {
-                                ScoreForcareset(score);
+                               attScore();
+                                scoreForcareset(score);
                             } else {
-                                ScoreForca(score);
+
+                                scoreForca(score);
                             }
                             letrasErradas = new ArrayList<String>();
 
@@ -179,24 +185,48 @@ public class MainActivity extends AppCompatActivity {
                 }
             }
         });
+        SharedPreferences sharedPreferences = getSharedPreferences(scoreMaximo,0);
+            if (sharedPreferences.contains("ScoreMaximo: ")) {
+                 scoreMaxx=sharedPreferences.getString("ScoreMaximo: ",Integer.toString(pontos));
+                    scoreMax.setText("ScoreMaximo: "+scoreMaxx);
+            }
+            else{
+                scoreMax.setText("ScoreMaximo: voce ainda nao jogou");
+
+        }
 
 }
 
-    private  void ScoreForca(TextView score){
+    private  void scoreForca(TextView score){
         pontos =pontos+10;
         Integer.toString(pontos);
         score.setText("Score:");
         score.setText(score.getText()+" "+pontos);
 
     }
-    private  void ScoreForcareset(TextView score){
+    private  void scoreForcareset(TextView score){
         pontos =0;
         Integer.toString(pontos);
         score.setText("Score:");
         score.setText(score.getText()+" "+pontos);
 
+
     }
 
+    private void  attScore(){
+
+        pontosMaxAux = Integer.parseInt(scoreMaxx);
+        if(pontosMaxAux<pontos){
+            SharedPreferences sharedPreferences = getSharedPreferences(scoreMaximo,0);
+            SharedPreferences.Editor editor =sharedPreferences.edit();
+
+            editor.putString("ScoreMaximo: ", Integer.toString(pontos));
+            editor.commit();
+            scoreMax.setText("ScoreMaximo: "+Integer.toString(pontos));
+
+       }
+
+   }
     private  void imagemForca(){
         switch (erro){
            case 0:
@@ -221,5 +251,6 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
+
 
 }
