@@ -207,21 +207,21 @@ public class MainActivity extends AppCompatActivity {
                  scoreMaxx=sharedPreferences.getString("ScoreMaximo: ",Integer.toString(pontos));
                     scoreMax.setText("ScoreMaximo: "+scoreMaxx);
             }
-            else{
+            else {
                 scoreMax.setText("ScoreMaximo: voce ainda nao jogou");
 
         }
 
 }
 
-    private  void scoreForca(TextView score){
+    private void scoreForca(TextView score){
         pontos =pontos+10;
         Integer.toString(pontos);
         score.setText("Score:");
         score.setText(score.getText()+" "+pontos);
 
     }
-    private  void scoreForcareset(TextView score){
+    private void scoreForcareset(TextView score) {
         pontos =0;
         Integer.toString(pontos);
         score.setText("Score:");
@@ -230,10 +230,10 @@ public class MainActivity extends AppCompatActivity {
 
     }
 
-    private void  attScore(){
+    private void  attScore() {
 
         pontosMaxAux = Integer.parseInt(scoreMaxx);
-        if(pontosMaxAux<pontos){
+        if(pontosMaxAux<pontos) {
             SharedPreferences sharedPreferences = getSharedPreferences(scoreMaximo,0);
             SharedPreferences.Editor editor =sharedPreferences.edit();
 
@@ -245,13 +245,13 @@ public class MainActivity extends AppCompatActivity {
 
    }
 
-   private void dialogConf(boolean situacao){
+   private void dialogConf(boolean situacao) {
        dialog =new AlertDialog.Builder(MainActivity.this);
         if(situacao==true) {
             dialog.setTitle("PARABENS VOCE GANHOU");
             dialog.setMessage("Mais 10 pontos pra você");
         }
-        else{
+        else {
             dialog.setTitle("Infelismente voce perdeu");
             dialog.setMessage("Seus pontos foram Zerados");
         }
@@ -265,8 +265,8 @@ public class MainActivity extends AppCompatActivity {
         dialog.create();
         dialog.show();
    }
-    private  void imagemForca(){
-        switch (erro){
+    private  void imagemForca() {
+        switch (erro) {
            case 0:
                fotoForca.setImageResource(R.drawable.forca0erro);
                   break;
