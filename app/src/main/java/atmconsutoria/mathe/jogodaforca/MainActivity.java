@@ -1,6 +1,8 @@
 package atmconsutoria.mathe.jogodaforca;
 
+import android.content.DialogInterface;
 import android.content.SharedPreferences;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,6 +15,7 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
+    private AlertDialog.Builder dialog;
     private String scoreMaxx;
     private int quantosTracos;
     private  int pontos = 0;
@@ -28,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
     private TextView scoreMax;
     private ListView listaLetras;
     private int erro ;
+    private boolean situacao;
     private ArrayList<String> letrasErradas = new ArrayList<String>();
     private boolean acabou = false;
     private String[] letras ={"A","B","C","Ç","D","E","F","G","H","I","J","K","L",
@@ -61,6 +65,7 @@ public class MainActivity extends AppCompatActivity {
         aux = palavras.get((int) (Math.random() * palavras.size()));
         quantosTracos = aux.length();
         palavraAleatoria = new ArrayList<String>();
+
 
 
         tracoControler = new String[quantosTracos];
@@ -168,12 +173,24 @@ public class MainActivity extends AppCompatActivity {
                             tentativa = "";
                             imagemForca();
                             if (a > 0) {
+                                //INFELISMENTE VOCE PERDEU
+                                situacao = false;
+                                dialogConf(situacao);
                                attScore();
                                 scoreForcareset(score);
                             } else {
+                                //PARABENS VOCE GANHOU
 
+                                situacao = true;
+                                dialogConf(situacao);
+                                attScore();
                                 scoreForca(score);
                             }
+
+                 //DIALOG É ABERTO AKI COM RESUTADO DA VARIAVEL SE GANHOU OU NAO
+                 //DAI PERGUNTO ... FALO : VAMOS RECOMEÇAR DAI APERTA OK
+                 // NISSO QUE APERTA OK O SCORERESET E SCOFORCA SAO CHAMADO
+                 // DEPENDENDO DO CASO XD
                             letrasErradas = new ArrayList<String>();
 
                         }
@@ -226,6 +243,27 @@ public class MainActivity extends AppCompatActivity {
 
        }
 
+   }
+
+   private void dialogConf(boolean situacao){
+       dialog =new AlertDialog.Builder(MainActivity.this);
+        if(situacao==true) {
+            dialog.setTitle("PARABENS VOCE GANHOU");
+            dialog.setMessage("Mais 10 pontos pra você");
+        }
+        else{
+            dialog.setTitle("Infelismente voce perdeu");
+            dialog.setMessage("Seus pontos foram Zerados");
+        }
+        dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
+            @Override
+            public void onClick(DialogInterface dialogInterface, int i) {
+                Toast.makeText(MainActivity.this,"Pressionado botão Ok",Toast.LENGTH_SHORT).show();
+
+            }
+        });
+        dialog.create();
+        dialog.show();
    }
     private  void imagemForca(){
         switch (erro){
