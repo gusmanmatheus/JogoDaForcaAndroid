@@ -269,6 +269,7 @@ public class MainActivity extends AppCompatActivity {
         switch (erro) {
            case 0:
                fotoForca.setImageResource(R.drawable.forca0erro);
+               
                   break;
            case 1:
                fotoForca.setImageResource(R.drawable.forca1erro);

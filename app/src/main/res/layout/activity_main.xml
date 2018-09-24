@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/forcaaa"
+    android:background="@drawable/madeirafundo"
     android:orientation="vertical"
     tools:context=".MainActivity">
 
@@ -13,7 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="MaxScore:"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textSize="20sp" />
 
     <TextView
@@ -21,7 +21,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Score:0"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textSize="20sp" />
 
     <TextView
@@ -29,18 +29,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Letras usadas:"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textSize="20sp" />
 
     <ImageView
         android:id="@+id/enforcado_Id"
         android:layout_width="match_parent"
-        android:layout_height="264dp"
+        android:layout_height="238dp"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginTop="8dp"
-        android:adjustViewBounds="false"
+        android:adjustViewBounds="true"
         android:background="@drawable/forca0erro"
         android:cropToPadding="false" />
 
@@ -48,7 +48,7 @@
         android:id="@+id/palavr_Traco_Id"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/background_light"
         android:textColorLink="@android:color/holo_orange_light"
         android:textSize="36sp" />
 
