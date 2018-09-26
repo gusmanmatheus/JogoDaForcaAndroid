@@ -16,7 +16,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder dialog;
-    private String scoreMaxx;
+    private String scoreMaxx ="0";
     private int quantosTracos;
     private  int pontos = 0;
     private int pontosMaxAux;
@@ -113,10 +113,9 @@ public class MainActivity extends AppCompatActivity {
  //se nao tiver repetidas segue o fluxo nomalmente
                     letrasErradas.add(letras[posicao]);
 
-                    if (tentativa != null && tentativa != "") {
+                  //  if (tentativa != null && tentativa != "") {
 
-                    }
-                    else {
+
                         tentativa = letras[posicao];
                         Toast.makeText(getApplicationContext(), letras[posicao], Toast.LENGTH_SHORT).show();
 
@@ -200,7 +199,7 @@ public class MainActivity extends AppCompatActivity {
                             letrasUsadas.setText(letrasUsadas.getText()+" "+letrasErradas.get(u));
                      }
                 }
-            }
+            //}
         });
         SharedPreferences sharedPreferences = getSharedPreferences(scoreMaximo,0);
             if (sharedPreferences.contains("ScoreMaximo: ")) {
@@ -231,9 +230,8 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void  attScore() {
-
-        pontosMaxAux = Integer.parseInt(scoreMaxx);
-        if(pontosMaxAux<pontos) {
+             pontosMaxAux = Integer.parseInt(scoreMaxx);
+             if(pontosMaxAux<pontos) {
             SharedPreferences sharedPreferences = getSharedPreferences(scoreMaximo,0);
             SharedPreferences.Editor editor =sharedPreferences.edit();
 
@@ -247,12 +245,12 @@ public class MainActivity extends AppCompatActivity {
 
    private void dialogConf(boolean situacao) {
        dialog =new AlertDialog.Builder(MainActivity.this);
-        if(situacao==true) {
+        if (situacao) {
             dialog.setTitle("PARABENS VOCE GANHOU");
             dialog.setMessage("Mais 10 pontos pra você");
         }
         else {
-            dialog.setTitle("Infelismente voce perdeu");
+            dialog.setTitle("Infelizmente voce perdeu");
             dialog.setMessage("Seus pontos foram Zerados");
         }
         dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
