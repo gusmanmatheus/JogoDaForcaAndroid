@@ -79,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 android.R.id.text1,
                 letras
         );
+        
         listaLetras.setAdapter(adaptador);
         String testee = "";
 
