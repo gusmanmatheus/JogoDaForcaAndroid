@@ -16,12 +16,12 @@ import android.widget.Toast;
 import java.util.ArrayList;
 public class MainActivity extends AppCompatActivity {
     private AlertDialog.Builder dialog;
-    private String scoreMaxx ="0";
+    private String scoreMaxx= "0";
     private int quantosTracos;
-    private  int pontos = 0;
+    private int pontos = 0;
     private int pontosMaxAux;
     private String tentativa;
-    private static  final String scoreMaximo= "0";
+    private final String scoreMaximo = "0";
     private String[] tracoControler;
     private ArrayList<String> palavraAleatoria;
     private ImageView fotoForca;
@@ -38,7 +38,6 @@ public class MainActivity extends AppCompatActivity {
             "M","N","O","P","Q","R","S","T","U","V","W","X","Y","Z"};
     String  aux  ;
     private static ArrayList<String> palavras = new ArrayList<String>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         palavras.add("casaco");
@@ -65,9 +64,6 @@ public class MainActivity extends AppCompatActivity {
         aux = palavras.get((int) (Math.random() * palavras.size()));
         quantosTracos = aux.length();
         palavraAleatoria = new ArrayList<String>();
-
-
-
         tracoControler = new String[quantosTracos];
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
@@ -82,61 +78,64 @@ public class MainActivity extends AppCompatActivity {
                 android.R.layout.simple_list_item_1,
                 android.R.id.text1,
                 letras
-
         );
         listaLetras.setAdapter(adaptador);
         String testee = "";
+
         for (int o = 0; aux.length() > o; o++) {
             testee += " - ";
         }
+
         tracos.setText(testee);
-//pegando qual letra clickada e passando pra uma variavel ,e criando uma vez so , pra nao
-//ficar cicando varias vezes
+
+         //pegando qual letra clickada e passando pra uma variavel ,e criando uma vez so , pra nao
+        //ficar cicando varias vezes
 
         for (int l = 0; aux.length() > l; l++) {
             palavraAleatoria.add(String.valueOf((aux.charAt(l))));
         }
-
-
         listaLetras.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> adapterView, View view, int posicao, long id) {
- //se a letra inserida for igual as outras ja inserida, o return impede que entre
-                for (String tro: letrasErradas) {
+        //se a letra inserida for igual as outras ja inserida, o return impede que entre
 
+                for (String tro: letrasErradas) {
                     if (tro.equals(letras[posicao])) {
                        return;
-
                     }
                 }
 
- //se nao tiver repetidas segue o fluxo nomalmente
-                    letrasErradas.add(letras[posicao]);
+        //se nao tiver repetidas segue o fluxo nomalmente
 
-                  //  if (tentativa != null && tentativa != "") {
-
-
+                        letrasErradas.add(letras[posicao]);
                         tentativa = letras[posicao];
                         Toast.makeText(getApplicationContext(), letras[posicao], Toast.LENGTH_SHORT).show();
 
                         for (int i = 0; i < quantosTracos; i++) {
+
                             if (tracoControler == null || tracoControler.equals("")) {
                                 tracoControler[i] = " - ";
                             }
                         }
+
                         int controle = 0;
+
                         for (int j = 0; j < quantosTracos; j++) {
+
                             if (palavraAleatoria.get(j).toLowerCase().equals(tentativa.toLowerCase())) {
                                 tracoControler[j] = tentativa;
                                 controle++;
                             }
                         }
+
                         int a = 0;
                         String teste = "";
+
                         for (int j = 0; j < quantosTracos; j++) {
+
                             if (tracoControler[j] != null && !tracoControler[j].equals("")) {
                                 teste += tracoControler[j];
-
                             } else {
                                 teste += " - ";
                                 a++;
@@ -158,101 +157,91 @@ public class MainActivity extends AppCompatActivity {
                             quantosTracos = aux.length();
                             tracoControler = new String[quantosTracos];
                             palavraAleatoria = new ArrayList<String>();
+
                             for (int l = 0; aux.length() > l; l++) {
+
                                 palavraAleatoria.add(String.valueOf((aux.charAt(l))));
                             }
+
                             String testee = "";
+
                             for (int o = 0; aux.length() > o; o++) {
+
                                 testee += " - ";
-//                                    traco_controler[o]=" - ";
                             }
+
                             tracos.setText(testee);
-
-
                             tentativa = "";
-                            imagemForca();
+
                             if (a > 0) {
-                                //INFELISMENTE VOCE PERDEU
-                                situacao = false;
-                                dialogConf(situacao);
+                               //INFELISMENTE VOCE PERDEU
+                               situacao = false;
+                               dialogConf(situacao);
                                attScore();
-                                scoreForcareset(score);
+                               scoreForcareset(score);
                             } else {
                                 //PARABENS VOCE GANHOU
-
                                 situacao = true;
                                 dialogConf(situacao);
                                 attScore();
                                 scoreForca(score);
                             }
 
-                 //DIALOG É ABERTO AKI COM RESUTADO DA VARIAVEL SE GANHOU OU NAO
-                 //DAI PERGUNTO ... FALO : VAMOS RECOMEÇAR DAI APERTA OK
-                 // NISSO QUE APERTA OK O SCORERESET E SCOFORCA SAO CHAMADO
-                 // DEPENDENDO DO CASO XD
                             letrasErradas = new ArrayList<String>();
-
                         }
-                        letrasUsadas.setText("Letras usadas:");
+                            letrasUsadas.setText("Letras usadas:");
 
                         for (int u = 0; letrasErradas.size() > u; u++) {
                             letrasUsadas.setText(letrasUsadas.getText()+" "+letrasErradas.get(u));
                      }
                 }
-            //}
-        });
-        SharedPreferences sharedPreferences = getSharedPreferences(scoreMaximo,0);
+            });
+            SharedPreferences sharedPreferences = getSharedPreferences(scoreMaximo,0);
+
             if (sharedPreferences.contains("ScoreMaximo: ")) {
                  scoreMaxx=sharedPreferences.getString("ScoreMaximo: ",Integer.toString(pontos));
                     scoreMax.setText("ScoreMaximo: "+scoreMaxx);
-            }
-            else {
+            } else {
                 scoreMax.setText("ScoreMaximo: voce ainda nao jogou");
-
-        }
-
+         }
 }
-
     private void scoreForca(TextView score){
         pontos =pontos+10;
         Integer.toString(pontos);
         score.setText("Score:");
         score.setText(score.getText()+" "+pontos);
-
     }
+
     private void scoreForcareset(TextView score) {
         pontos =0;
         Integer.toString(pontos);
         score.setText("Score:");
         score.setText(score.getText()+" "+pontos);
-
-
     }
 
     private void  attScore() {
              pontosMaxAux = Integer.parseInt(scoreMaxx);
+
              if(pontosMaxAux<pontos) {
             SharedPreferences sharedPreferences = getSharedPreferences(scoreMaximo,0);
             SharedPreferences.Editor editor =sharedPreferences.edit();
-
             editor.putString("ScoreMaximo: ", Integer.toString(pontos));
             editor.commit();
             scoreMax.setText("ScoreMaximo: "+Integer.toString(pontos));
-
-       }
-
-   }
+             }
+    }
 
    private void dialogConf(boolean situacao) {
        dialog =new AlertDialog.Builder(MainActivity.this);
+
         if (situacao) {
             dialog.setTitle("PARABENS VOCE GANHOU");
             dialog.setMessage("Mais 10 pontos pra você");
-        }
-        else {
+        } else {
             dialog.setTitle("Infelizmente voce perdeu");
             dialog.setMessage("Seus pontos foram Zerados");
         }
+
         dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
             @Override
             public void onClick(DialogInterface dialogInterface, int i) {
@@ -263,11 +252,12 @@ public class MainActivity extends AppCompatActivity {
         dialog.create();
         dialog.show();
    }
+
     private  void imagemForca() {
+
         switch (erro) {
            case 0:
                fotoForca.setImageResource(R.drawable.forca0erro);
-               
                   break;
            case 1:
                fotoForca.setImageResource(R.drawable.forca1erro);
@@ -288,6 +278,5 @@ public class MainActivity extends AppCompatActivity {
         }
 
     }
-
 
 }
