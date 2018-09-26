@@ -79,7 +79,7 @@ public class MainActivity extends AppCompatActivity {
                 android.R.id.text1,
                 letras
         );
-        
+
         listaLetras.setAdapter(adaptador);
         String testee = "";
 
@@ -240,7 +240,7 @@ public class MainActivity extends AppCompatActivity {
             dialog.setMessage("Mais 10 pontos pra você");
         } else {
             dialog.setTitle("Infelizmente voce perdeu");
-            dialog.setMessage("Seus pontos foram Zerados");
+            dialog.setMessage("Voce fez: "+pontos+"seu record é: "+scoreMaxx+"e seus pontos foram Zerados");
         }
 
         dialog.setPositiveButton("Ok", new DialogInterface.OnClickListener() {
